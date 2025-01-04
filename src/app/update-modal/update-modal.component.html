@@ -1,0 +1,47 @@
+<div class="modal" id="myModal" >
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title">Update</h5>
+        <!-- <button type="button" class="close" aria-label="Close" (click)="modalService.dismissAll()"> -->
+            <!-- <span aria-hidden="true">&times;</span>
+          </button> -->
+        <div class="modal-body">
+        <form [formGroup]="UpdateForm"  (ngSubmit)="onSubmit()">
+            <div>
+               
+                <label for="firstName">First Name</label>
+                <input id="firstName" formControlName="firstName" type="text" />
+                <div *ngIf="UpdateForm?.get('firstName')?.touched && UpdateForm?.get('firstName')?.invalid">
+                  <small *ngIf="UpdateForm?.get('firstName')?.hasError('required')">First name is required</small>
+                  <small *ngIf="UpdateForm?.get('firstName')?.hasError('minlength')">First name must be at least 2 characters long</small>
+                </div>
+              </div>
+              <div>
+                <label for="middleName">Middle Name</label>
+                <input id="middleName" formControlName="middleName" type="text" />
+               
+              </div>
+          
+              <div>
+                <label for="lastName">Last Name</label>
+                <input id="lastName" formControlName="lastName" type="text" />
+                <div *ngIf="UpdateForm?.get('lastName')?.touched && UpdateForm?.get('lastName')?.invalid">
+                  <small *ngIf="UpdateForm?.get('lastName')?.hasError('required')">Last name is required</small>
+                  <small *ngIf="UpdateForm?.get('lastName')?.hasError('minlength')">Last name must be at least 2 characters long</small>
+                </div>
+              </div>
+              <div>
+                <label for="phonenumber">Phone Number</label>
+                <input id="phonenumber" formControlName="phonenumber" />
+               
+              </div>
+
+              <button href="/dashboard" type="submit" class="btn btn-primary" [disabled]="UpdateForm?.invalid">Update</button>
+        </form>
+        </div>
+    </div>
+    </div>
+        <!-- <p><strong>Name:</strong> {{ rowData?.first_name }}</p>
+        <p><strong>Age:</strong> {{ rowData?.age }}</p> -->
+   
+</div>
