@@ -11,68 +11,15 @@
             </thead>
             <tbody>
               <tr *ngFor="let list of dataToDisplay; let i=index"  (click)="openChildComponent(list)"  >  
-                            <!----[ngStyle]="{'background-color': (list.id == 1) ? 'red' : 'blue'}"-->
-             <!---  [class.color]=" list.gender =='Female' ">-->
+                            
                 <td *ngFor="let column of displayColumns"  [ngStyle]="{'background-color': (list.status == 'positive') ? 'red' : (list.status == 'negative') ?'green':'yellow'}" >
                   {{ list[column] }}
                 </td>
               </tr>                                                                        
             </tbody>                                    
           </table>
-          <app-update-modal *ngIf="selectedRow" (updateDatainParent)="displayvalue($event)" [rowData]="selectedRow"></app-update-modal>
+          
+          <app-update-modal *ngIf="isPopupOpen"  (updateDatainParent)="displayvalue($event)" (closePopup)="closePopup()" [rowData]="selectedRow"></app-update-modal>
         </div>
       </div>  
 </div>
-
-<!-- <app-update-modal ></app-update-modal> -->
-
-<!-- 
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLiveLabel">Update</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form [formGroup]="UpdateForm"  (ngSubmit)="onSubmit()">
-                <div>
-                   
-                    <label for="firstName">First Name</label>
-                    <input id="firstName" formControlName="firstName" type="text" />
-                    <div *ngIf="UpdateForm?.get('firstName')?.touched && UpdateForm?.get('firstName')?.invalid">
-                      <small *ngIf="UpdateForm?.get('firstName')?.hasError('required')">First name is required</small>
-                      <small *ngIf="UpdateForm?.get('firstName')?.hasError('minlength')">First name must be at least 2 characters long</small>
-                    </div>
-                  </div>
-                  <div>
-                    <label for="middleName">Middle Name</label>
-                    <input id="middleName" formControlName="middleName" type="text" />
-                   
-                  </div>
-              
-                  <div>
-                    <label for="lastName">Last Name</label>
-                    <input id="lastName" formControlName="lastName" type="text" />
-                    <div *ngIf="UpdateForm?.get('lastName')?.touched && UpdateForm?.get('lastName')?.invalid">
-                      <small *ngIf="UpdateForm?.get('lastName')?.hasError('required')">Last name is required</small>
-                      <small *ngIf="UpdateForm?.get('lastName')?.hasError('minlength')">Last name must be at least 2 characters long</small>
-                    </div>+
-                  </div>
-        
-        
-                  <button type="submit" class="btn btn-primary" [disabled]="UpdateForm?.invalid">Update</button>
-            </form>
-        </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{closeLabel}}</button> -->
-        <!--   <button (click)="saveChangeModal()" data-dismiss="modal" type="button" class="btn btn-primary" onclick=""></button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  
- -->
