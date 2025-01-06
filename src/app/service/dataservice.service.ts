@@ -1,32 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataserviceService {
-userData:any;
-  constructor(private http: HttpClient) { }
 
-  setData(data:any){
-this.userData = data;
+  constructor(private http: HttpClient) { }
+  
+  private dataSubject = new BehaviorSubject<any>(null);
+  data$ = this.dataSubject.asObservable();
+
+  setData(data: any) {
+    this.dataSubject.next(data);
   }
-  getData(){
-    return this.userData
-  }
-  // getJsonData(){
-  //   fetch("config.json")
-  //   .then((res) => {
-  //       if (!res.ok) {
-  //           throw new Error
-  //               (`HTTP error! Status: ${res.status}`);
-  //       }
-  //       return res;
-  //   })
-  //   .then((data) =>
-  //       console.log(data))
-  //   .catch((error) =>
-  //       console.error("Unable to fetch data:", error));
-  //  // return this.http.get('config.json')
-  // }
 }
