@@ -1,47 +1,54 @@
-<div class="container" id="myModal" >
-    <!-- <div class="modal-content"> -->
-        <!-- <div class="modal-header"> -->
-        <h5 class="modal-title">Update</h5>
-        <!-- <button type="button" class="close" aria-label="Close" (click)="modalService.dismissAll()"> -->
-            <!-- <span aria-hidden="true">&times;</span>
-          </button> -->
-        <!-- <div class="modal-body"> -->
-        <form [formGroup]="UpdateForm"  (ngSubmit)="onSubmit()">
-            <div>
-               
-                <label for="firstName">First Name</label>
-                <input id="firstName" formControlName="firstName" type="text" />
-                <div *ngIf="UpdateForm?.get('firstName')?.touched && UpdateForm?.get('firstName')?.invalid">
-                  <small *ngIf="UpdateForm?.get('firstName')?.hasError('required')">First name is required</small>
-                  <small *ngIf="UpdateForm?.get('firstName')?.hasError('minlength')">First name must be at least 2 characters long</small>
-                </div>
-              </div>
-              <div>
-                <label for="middleName">Middle Name</label>
-                <input id="middleName" formControlName="middleName" type="text" />
-               
-              </div>
-          
-              <div>
-                <label for="lastName">Last Name</label>
-                <input id="lastName" formControlName="lastName" type="text" />
-                <div *ngIf="UpdateForm?.get('lastName')?.touched && UpdateForm?.get('lastName')?.invalid">
-                  <small *ngIf="UpdateForm?.get('lastName')?.hasError('required')">Last name is required</small>
-                  <small *ngIf="UpdateForm?.get('lastName')?.hasError('minlength')">Last name must be at least 2 characters long</small>
-                </div>
-              </div>
-              <div>
-                <label for="phonenumber">Phone Number</label>
-                <input id="phonenumber" formControlName="phonenumber" />
-               
-              </div>
+<div class="container" id="myModal">
 
-              <button href="/dashboard" type="submit" class="btn btn-primary" [disabled]="UpdateForm?.invalid">Update</button>
-        </form>
-        <!-- </div> -->
-    <!-- </div> -->
-    <!-- </div> -->
-        <!-- <p><strong>Name:</strong> {{ rowData?.first_name }}</p>
-        <p><strong>Age:</strong> {{ rowData?.age }}</p> -->
-   
+  <h5 class="modal-title">Update</h5>
+
+  <form [formGroup]="UpdateForm" (ngSubmit)="submitData()">
+    <div>
+      <label for="RegNo">Id</label>
+      <input id="RegNo" formControlName="RegNo" type="text" [disabled]="true" />
+    </div>
+
+
+    <div>
+      <label for="first_name">First Name</label>
+      <input id="first_name" formControlName="first_name" type="text" />
+      <div *ngIf="UpdateForm?.get('first_name')?.touched && UpdateForm?.get('first_name')?.invalid">
+        <small *ngIf="UpdateForm?.get('first_name')?.hasError('required')">First name is required</small>
+        <small *ngIf="UpdateForm?.get('first_name')?.hasError('minlength')">First name must be at least 2 characters
+          long</small>
+      </div>
+    </div>
+    <div>
+      <label for="middle_name">Middle Name</label>
+      <input id="middle_name" formControlName="middle_name" type="text" />
+
+    </div>
+
+    <div>
+      <label for="last_name">Last Name</label>
+      <input id="last_name" formControlName="last_name" type="text" />
+      <div *ngIf="UpdateForm?.get('last_name')?.touched && UpdateForm?.get('last_name')?.invalid">
+        <small *ngIf="UpdateForm?.get('last_name')?.hasError('required')">Last name is required</small>
+        <small *ngIf="UpdateForm?.get('last_name')?.hasError('minlength')">Last name must be at least 2 characters
+          long</small>
+      </div>
+    </div>
+    <div>
+      <label for="phone_number">Phone Number</label>
+      <input id="phone_number" formControlName="phone_number" />
+
+    </div>
+    <div>
+      <label for="status">status</label>
+      <select formControlName="status">
+        <option *ngFor="let option of options" [value]="option">
+          {{ option }}
+        </option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="UpdateForm?.invalid">Update</button>
+  </form>
+
+
 </div>
