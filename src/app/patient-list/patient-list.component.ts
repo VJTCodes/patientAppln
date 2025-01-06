@@ -15,6 +15,7 @@ export class PatientListComponent {
   dataToDisplay: any;
   displayColumns:any;
   selectedRow:any;
+  isPopupOpen: boolean = false;
   constructor(private data:DataserviceService,private modalService: NgbModal){
 
   }
@@ -22,19 +23,40 @@ export class PatientListComponent {
   ngOnInit(){
     this.dataToDisplay = patientData
     this.displayColumns = Object.keys(this.dataToDisplay[0])
-    // this.data.getJsonData().subscribe(data=>{
-    //   this.dataToDisplay = data;
-    //   this.displayColumns = Object.keys(this.dataToDisplay[0])
-    // })
+    this.data.data$.subscribe(ele => {
+      // Process the received data
+      const index = this.dataToDisplay.findIndex((row: { id: any; }) => row.id === ele.RegNo);
+      if (index !== -1) {
+        ele.id =  ele.RegNo
+        this.dataToDisplay[index] = { ...ele };
+      }
+      else{//Add new record
+
+      }
+      this.closePopup();
+     
+    });
+   
   }
-  openChildComponent(rowData: any) {
+  openChildComponent(row: any) {
     // You can pass data to the child component using inputs
+    this.selectedRow = row;
     const modalRef = this.modalService.open(UpdateModalComponent);
-    modalRef.componentInstance.rowData = rowData; // Pass row data to child component
+    modalRef.componentInstance.rowData = row; // Pass row data to child component
+   
   }
-  displayvalue(event:any){
-    alert(event)
-    console.log(event)
+  closePopup(): void {
+    this.isPopupOpen = false;
+    this.modalService.dismissAll()
+  }
+  displayvalue(updatedRow:any){
+    const index = this.selectedRow.findIndex((row: { id: any; }) => row.id === updatedRow.id);
+    if (index !== -1) {
+      this.selectedRow[index] = { ...updatedRow };
+    }
+  
+    console.log(updatedRow)
+    this.closePopup(); // Close the popup after updating
   }
 }
 
