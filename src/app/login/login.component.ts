@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,18 +10,23 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-name: any;
+
 password: any;
+name: any;
 constructor(private router:Router){
 
 }
+ngOninit(){
 
+}
 login(){
-  if(this.name?.length > 0 && this.password?.length >0){
+  if(this.name?.length >= 0 && this.password?.length >= 0){
     this.router.navigate(['/dashboard'])
+   
   }
   else{
     alert("Please provide valid user name and password")
+   
   }
 }
 
