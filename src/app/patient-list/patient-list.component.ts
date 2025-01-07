@@ -3,6 +3,7 @@ import { DataserviceService } from '../service/dataservice.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { patientData } from '../config';
 import { UpdateModalComponent } from '../update-modal/update-modal.component';
+import { Location } from '@angular/common'; // Import Location service
 
 @Component({
   selector: 'app-patient-list',
@@ -17,7 +18,7 @@ export class PatientListComponent {
   selectedRow:any;
   isPopupOpen: boolean = false;
   showAlert: boolean = false;
-  constructor(private data:DataserviceService,private modalService: NgbModal){
+  constructor(private data:DataserviceService,private modalService: NgbModal,private location: Location){
 
   }
 
@@ -45,6 +46,8 @@ export class PatientListComponent {
     this.selectedRow = row;
     const modalRef = this.modalService.open(UpdateModalComponent);
     modalRef.componentInstance.rowData = row; // Pass row data to child component
+    window.history.pushState({}, '', `?id=${row.id}`);
+  //  this.location.replaceState(`?id=${row.id}`);
    
   }
   closePopup(): void {
